@@ -28,7 +28,7 @@ const PrivateAccommodation = () => {
         }}>
           <div 
             className={styles.accommodationCard} 
-            onClick={() => handleNavigation('/ensuite-rooms')}
+            onClick={() => handleNavigation('/private-accommodation/ensuite-rooms')}
             style={{ cursor: 'pointer' }}
           >
             <div className={styles.imageWrapper}>

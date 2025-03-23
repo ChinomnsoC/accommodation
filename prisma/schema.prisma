@@ -13,35 +13,103 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Room {
-  id             Int      @id @default(autoincrement())
-  hallName       String
-  features       String[]
+enum RoomType {
+  ENSUITE
+  FLAT
+  GROUP
+}
+
+enum RoomStatus {
+  AVAILABLE
+  BOOKED
+  PENDING_BOOKING
+}
+
+model Building {
+  id              Int      @id @default(autoincrement())
+  name            String   @unique
+  description     String?
   distanceToVenue String
-  imageUrl       String
-  capacity       Int
-  roomsAvailable Int
-  bookings       Booking[]
-  @@unique([id, hallName])
+  mainImage       String
+  additionalImages String[]
+  features        String[]   // Building amenities like "Security", "Parking", etc.
+  
+  // Room configuration
+  totalRooms      Int        // Total number of rooms in the building
+  roomType        RoomType   // Type of rooms in this building
+  pricePerRoom    Float      // Standard price for rooms in this building
+  roomCapacity    Int        // Standard capacity per room
+  roomAmenities   String[]   // Standard amenities in each room
+  
+  // Dynamic counts (updated when rooms are booked/released)
+  availableRooms  Int
+  bookedRooms     Int       @default(0)
+  lockedBookings  Int       @default(0)
+  heldBookings    Int       @default(0)
+  pendingBookings Int       @default(0)
+
+  // Bookings relation
+  bookings        Booking[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("buildings")
+}
+
+model Room {
+  id            Int        @id @default(autoincrement())
+  roomNumber    String     // Actual room number/identifier within the building
+  type          RoomType
+  status        RoomStatus @default(AVAILABLE)
+  price         Float      // Price per month
+  roomCapacity  Int        // How many people can stay
+  amenities     String[]   // Specific amenities for this room
+  images        String[]   // Images specific to this room type
+  description   String?    // Specific description for this room
+  
+  // Relations
+  building      Building   @relation(fields: [buildingId], references: [id])
+  buildingId    Int
+  bookings      Booking[]
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@unique([buildingId, roomNumber])
+  @@map("rooms")
 }
 
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String
-  bookings Booking[]
-  @@unique([id, name])
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("users")
 }
 
 model Booking {
-  id         Int      @id @default(autoincrement())
-  userId     String
-  userName   String
-  hallId     Int
-  facilityName   String
-  amountPaid Float
-  date       DateTime
-  user       User     @relation(fields: [userId, userName], references: [id, name])
-  room       Room     @relation(fields: [hallId, facilityName], references: [id, hallName])
-  @@unique([id, userName, facilityName])
+  id          Int      @id @default(autoincrement())
+  buildingId  Int
+  roomNumber  String   // e.g., "101", "102", etc.
+  startDate   DateTime
+  endDate     DateTime
+  totalAmount Float
+  status      String   // "PENDING", "CONFIRMED", "CANCELLED", "HELD", "LOCKED" 
+  
+  // User relation
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  // Building relation
+  building    Building @relation(fields: [buildingId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([buildingId, roomNumber, startDate]) // Prevent double booking
+  @@map("bookings")
 }

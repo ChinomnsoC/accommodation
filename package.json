@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:seed": "prisma db seed"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",
@@ -26,5 +27,8 @@
     "supabase": "^2.6.8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.7.3"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
