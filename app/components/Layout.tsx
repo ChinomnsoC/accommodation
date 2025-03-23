@@ -10,17 +10,17 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className={styles['page-container']}>
+    <div className={styles.pageContainer}>
       <header className={styles.header}>
-        <h1 className={styles['header-title']}>ShortNest</h1>
-        <nav className={styles['header-nav']}>
-          <button className={styles['nav-link']}>About</button>
-          <button className={styles['nav-link']}>Search</button>
-          <button className={styles['nav-link']}>Contact</button>
+        <h1 className={styles.headerTitle}>ShortNest</h1>
+        <nav className={styles.headerNav}>
+          <a href="/about" className={styles.navLink}>About</a>
+          <a href="/search" className={styles.navLink}>Search</a>
+          <a href="/contact" className={styles.navLink}>Contact</a>
         </nav>
       </header>
 
-      <main className={styles['main-content']} style={{padding: 0}}>
+      <main className={styles.mainContent} style={{padding: 0}}>
         {children}
       </main>
 
