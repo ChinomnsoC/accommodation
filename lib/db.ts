@@ -1,10 +1,10 @@
 import prisma from '../prisma/prisma';
-
+import { RoomType } from '@prisma/client';
 export async function getRoomsByType(type: 'ENSUITE' | 'FLAT' | 'GROUP') {
   try {
     const rooms = await prisma.room.findMany({
       where: {
-        type,
+        type: type as RoomType,
         status: 'AVAILABLE',
       },
       include: {
