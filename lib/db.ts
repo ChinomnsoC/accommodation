@@ -3,7 +3,7 @@ export async function getRoomsByType(type: 'ENSUITE' | 'FLAT' | 'GROUP') {
   try {
     const rooms = await prisma.room.findMany({
       where: {
-        type,
+        type: type,
         status: 'AVAILABLE',
       },
       include: {
