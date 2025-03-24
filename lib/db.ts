@@ -1,9 +1,14 @@
+// import { ObjectEnumValue } from '@prisma/client/runtime/library';
+import { RoomType } from '@prisma/client';
 import prisma from '../prisma/prisma';
-export async function getRoomsByType(type: 'ENSUITE' | 'FLAT' | 'GROUP') {
+
+// export async function getRoomsByType(RoomType: ObjectEnumValue) {
+// export async function getRoomsByType(RoomType: RoomType.ENSUITE | RoomType.FLAT | RoomType.GROUP ) {
+export async function getRoomsByType(type: RoomType) {
   try {
     const rooms = await prisma.room.findMany({
       where: {
-        type: type,
+        type,
         status: 'AVAILABLE',
       },
       include: {
