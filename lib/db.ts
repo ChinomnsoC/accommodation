@@ -1,6 +1,7 @@
 // import { ObjectEnumValue } from '@prisma/client/runtime/library';
-import { RoomType } from '@prisma/client';
 import prisma from '../prisma/prisma';
+
+type RoomType = 'ENSUITE' | 'FLAT' | 'GROUP';
 
 // export async function getRoomsByType(RoomType: ObjectEnumValue) {
 // export async function getRoomsByType(RoomType: RoomType.ENSUITE | RoomType.FLAT | RoomType.GROUP ) {
