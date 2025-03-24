@@ -1,20 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRoomById } from '@/lib/db';
 
-type RouteContext = {
-  params: {
-    id: string;
-  };
-};
-
 export async function GET(
   request: NextRequest,
-  context: RouteContext
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(context.params.id);
+    const { id } = await params;
+    const roomId = Number(id);
     
-    if (isNaN(id)) {
+    if (isNaN(roomId)) {
       return NextResponse.json(
         { 
           success: false, 
@@ -24,7 +19,7 @@ export async function GET(
       );
     }
 
-    const room = await getRoomById(id);
+    const room = await getRoomById(roomId);
     
     if (!room) {
       return NextResponse.json(

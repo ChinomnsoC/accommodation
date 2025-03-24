@@ -31,7 +31,6 @@ model Building {
   description     String?
   distanceToVenue String
   mainImage       String
-  additionalImages String[]
   features        String[]   // Building amenities like "Security", "Parking", etc.
   
   // Room configuration
@@ -48,8 +47,9 @@ model Building {
   heldBookings    Int       @default(0)
   pendingBookings Int       @default(0)
 
-  // Bookings relation
-  bookings        Booking[]
+  // Relations
+  rooms           Room[]    // Relation to rooms in this building
+  bookings        Booking[] // Relation to bookings for this building
 
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -71,7 +71,7 @@ model Room {
   // Relations
   building      Building   @relation(fields: [buildingId], references: [id])
   buildingId    Int
-  bookings      Booking[]
+  bookings      Booking[]  @relation("RoomBookings") // Named relation
 
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
@@ -93,23 +93,24 @@ model User {
 
 model Booking {
   id          Int      @id @default(autoincrement())
-  buildingId  Int
-  roomNumber  String   // e.g., "101", "102", etc.
   startDate   DateTime
   endDate     DateTime
   totalAmount Float
-  status      String   // "PENDING", "CONFIRMED", "CANCELLED", "HELD", "LOCKED" 
+  status      String   // "PENDING", "CONFIRMED", "CANCELLED", "HELD", "LOCKED"
   
-  // User relation
+  // Relations
   userId      String
   user        User     @relation(fields: [userId], references: [id])
   
-  // Building relation
+  buildingId  Int
   building    Building @relation(fields: [buildingId], references: [id])
+  
+  roomId      Int
+  room        Room     @relation("RoomBookings", fields: [roomId], references: [id]) // Named relation
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@unique([buildingId, roomNumber, startDate]) // Prevent double booking
+  @@unique([buildingId, roomId, startDate]) // Prevent double booking
   @@map("bookings")
 }

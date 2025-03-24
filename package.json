@@ -2,12 +2,14 @@
   "name": "accommodation",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "import-data": "node --loader ts-node/esm scripts/import-data.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",
@@ -18,14 +20,17 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/csv-parse": "^1.2.2",
     "@types/node": "^20",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "csv-parse": "^5.6.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "postcss": "^8",
     "supabase": "^2.6.8",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "prisma": {
