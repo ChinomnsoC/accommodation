@@ -1,8 +1,16 @@
 // import { ObjectEnumValue } from '@prisma/client/runtime/library';
 import prisma from '../prisma/prisma';
+import { RoomType } from '@prisma/client';
 
-type RoomType = 'ENSUITE' | 'FLAT' | 'GROUP';
+// type RoomType = 'ENSUITE' | 'FLAT' | 'GROUP';
+// Fetch zero or more Buildings
 
+
+// const RoomType: {
+//   ENSUITE: "ENSUITE";
+//   FLAT: "FLAT";
+//   GROUP: "GROUP";
+// }
 // export async function getRoomsByType(RoomType: ObjectEnumValue) {
 // export async function getRoomsByType(RoomType: RoomType.ENSUITE | RoomType.FLAT | RoomType.GROUP ) {
 export async function getRoomsByType(type: RoomType) {
