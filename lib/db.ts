@@ -1,5 +1,5 @@
 import prisma from '../prisma/prisma';
-import { RoomType } from '@prisma/client';
+import type { RoomType } from '@prisma/client';
 
 export async function getRoomsByType(type: RoomType) {
   try {
