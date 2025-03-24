@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "db:seed": "prisma db seed",
-    "import-data": "node --loader ts-node/esm scripts/import-data.ts"
+    "import-data": "node --loader ts-node/esm scripts/import-data.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",
