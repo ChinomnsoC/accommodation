@@ -1,0 +1,228 @@
+.pageContainer {
+  background-color: #f8f8f8; /* Off-white background */
+  min-height: 100vh; /* Ensure the container takes full height */
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #2E1A47;
+    color: #ffffff;
+  }
+
+  .headerTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+.headerNav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.navLink {
+    color: white;
+    transition: color 0.2s;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+  
+.navLink:hover {
+    color: #E9D5FF;
+}
+
+.mainContent {
+  flex: 1; /* Allow main content to grow */
+  padding: 2rem;
+}
+
+.footer {
+  background-color: #2E1A47; /* Footer background color */
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.footerContainer {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+  @media (min-width: 640px) {
+    .footerContainer {
+      flex-direction: row;
+    }
+  }
+
+.footerNav {
+    display: flex;
+    gap: 2rem;
+}
+
+.navLink {
+    color: white;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.socialContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+  .footerText {
+    color: white;
+    font-size: 0.875rem;
+}
+
+  .socialIcons {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .socialIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
+  }
+
+.buttonContainer {
+  display: flex; /* Use flexbox for horizontal layout */
+  justify-content: space-between; /* Space between buttons */
+  gap: 0.2rem; /* Space between buttons */
+  padding: 0.2rem; 
+}
+
+.searchButton {
+  flex: 1; /* Allow buttons to grow equally */
+  max-width: 300px; /* Set a maximum width for the buttons */
+  border: none; /* Remove default button border */
+  background: none; /* Remove default button background */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.searchImageContainer {
+  position: relative;
+  width: 100%; /* Full width for the button */
+  height: 200px; /* Set a fixed height for uniformity */
+  overflow: hidden; /* Ensure images don't overflow */
+}
+
+.searchImage {
+  object-fit: cover; /* Cover the entire area */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  border-radius: 0.5rem; /* Optional: rounded corners */
+}
+
+.searchText {
+  position: absolute; /* Position text over the image */
+  bottom: 10px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  color: white; /* Text color */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 0.5rem; /* Padding around text */
+  border-radius: 0.25rem; /* Optional: rounded corners */
+}
+
+.accommodationContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2E1A47;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.pageSubtitle {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.accommodationGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.accommodationCard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.accommodationCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.accommodationCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2E1A47;
+  margin-bottom: 0.5rem;
+}
+
+.cardDescription {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.viewMore {
+  display: inline-block;
+  color: #0066cc;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.viewMore:hover {
+  color: #004999;
+}
